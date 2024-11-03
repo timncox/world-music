@@ -1,0 +1,26 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[functions]
+  external_node_modules = ["next-auth"]
+
+[[redirects]]
+  from = "/.netlify/functions/auth/*"
+  to = "/.netlify/functions/auth"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[template.environment]
+  VITE_NEXTAUTH_URL = "Site URL (will be automatically set by Netlify)"
+  VITE_NEXTAUTH_SECRET = "Generate a random secret: openssl rand -base64 32"
+  VITE_WLD_APP_ID = "Your World ID App ID"
+  VITE_WLD_CLIENT_SECRET = "Your World ID Client Secret"
